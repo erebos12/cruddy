@@ -1,0 +1,169 @@
+basePath: /
+definitions:
+  model.Message:
+    properties:
+      message:
+        type: string
+    type: object
+  model.User:
+    properties:
+      isAdmin:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact: {}
+  description: This is CRUDDY
+  license: {}
+  title: Cruddy Swagger UI
+  version: "1.0"
+paths:
+  /:
+    get:
+      description: says hello
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: hello message
+          schema:
+            $ref: '#/definitions/model.Message'
+            type: object
+      summary: says hello
+      tags:
+      - /
+  /users:
+    delete:
+      description: delete all users which match attribute and value
+      parameters:
+      - description: attribute of a certain json
+        in: query
+        name: attribute
+        required: true
+        type: string
+      - description: the value of the parameter attribute
+        in: query
+        name: value
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: successfully deleted
+          schema:
+            $ref: '#/definitions/model.Message'
+            type: object
+        "404":
+          description: could not delete user
+          schema:
+            $ref: '#/definitions/model.Message'
+            type: object
+      summary: delete all users which match attribute and value
+      tags:
+      - users
+    get:
+      parameters:
+      - description: attribute of a certain json
+        in: query
+        name: attribute
+        required: true
+        type: string
+      - description: the value of the parameter attribute
+        in: query
+        name: value
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: user found
+          schema:
+            items:
+              $ref: '#/definitions/model.User'
+            type: array
+        "404":
+          description: user not found
+          schema:
+            $ref: '#/definitions/model.Message'
+            type: object
+        "503":
+          description: server error while getting user
+          schema:
+            $ref: '#/definitions/model.Message'
+            type: object
+      summary: get all users that matches attribute and value
+      tags:
+      - users
+    post:
+      consumes:
+      - application/json
+      description: add by json user
+      parameters:
+      - description: Add user
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/model.User'
+          type: object
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: user successfully created
+          schema:
+            $ref: '#/definitions/model.User'
+            type: object
+        "400":
+          description: error reading message
+          schema:
+            $ref: '#/definitions/model.Message'
+            type: object
+      summary: add a user
+      tags:
+      - users
+  /users/all:
+    delete:
+      description: delete all users
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: successfully deleted all users
+          schema:
+            $ref: '#/definitions/model.Message'
+            type: object
+        "404":
+          description: could not delete all users
+          schema:
+            $ref: '#/definitions/model.Message'
+            type: object
+      summary: delete all users
+      tags:
+      - users
+    get:
+      description: get all user
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: user found
+          schema:
+            items:
+              $ref: '#/definitions/model.User'
+            type: array
+        "404":
+          description: no results
+          schema:
+            $ref: '#/definitions/model.Message'
+            type: object
+      summary: get all user
+      tags:
+      - users
+swagger: "2.0"

@@ -1,0 +1,8 @@
+.idea/
+.vscode/
+
+
+# binaries
+main
+server
+golang-backend-blueprint.test
