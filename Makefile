@@ -10,6 +10,9 @@ kill: ## kill'em all
 local: kill ## start all locally
 	docker-compose up --build
 
+test: kill ## execute tests 
+	docker-compose up -f docker-compose-start.yml --build
+
 purge: ## Remove dangling images (have a look with cat docker_purge.sh)
 	./docker_purge.sh 
 
