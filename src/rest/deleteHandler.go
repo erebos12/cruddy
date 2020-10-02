@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"infrastructure"
-	. "model"
-	. "utils"
+	. "../infrastructure"
+	. "../model"
+	. "../utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -27,7 +27,7 @@ func DeleteGenericAttributeHandler(c *gin.Context) {
 	value := c.Query("value")
 	parameter := fmt.Sprintf("attribute=%s, value=%s", attribute, value)
 	LogIt(INFO, method, fmt.Sprintf("DeleteGenericAttributeHandler %s", parameter))
-	err := infrastructure.DeleteByGenericAttr(attribute, value)
+	err := DeleteByGenericAttr(attribute, value)
 	if err != nil {
 		msg := fmt.Sprintf("Cannot delete entity with %s", parameter)
 		LogIt(ERROR, method, msg)
@@ -49,7 +49,7 @@ func DeleteGenericAttributeHandler(c *gin.Context) {
 // @Router /users/all [delete]
 func DeleteAllHandler(c *gin.Context) {
 	method := "DeleteAllHandler"
-	info, err := infrastructure.DeleteAll()
+	info, err := DeleteAll()
 	if err != nil {
 		msg := fmt.Sprintf("Cannot delete all entries")
 		LogIt(ERROR, method, msg)

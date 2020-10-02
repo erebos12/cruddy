@@ -1,11 +1,9 @@
 package infrastructure
 
 import (
+	. "../configuration"
+	. "../utils"
 	"fmt"
-
-	"configuration"
-
-	. "utils"
 
 	"gopkg.in/mgo.v2"
 	"gopkg.in/mgo.v2/bson"
@@ -15,7 +13,7 @@ var initialSession = initMongo()
 
 func initMongo() *mgo.Session {
 	method := "initMongo"
-	session, err := mgo.Dial(configuration.GetMongoUrl())
+	session, err := mgo.Dial(GetMongoUrl())
 	if err != nil {
 		message := fmt.Sprintf("Error connecting to mongo. Error '%v'", err)
 		LogIt(FATAL, method, message)
@@ -28,8 +26,8 @@ func initMongo() *mgo.Session {
 
 func getGollection(session *mgo.Session) mgo.Collection {
 	method := "getGollection"
-	db := *session.DB(configuration.GetMongoDB())
-	collection := db.C(configuration.GetMongoCollection())
+	db := *session.DB(GetMongoDB())
+	collection := db.C(GetMongoCollection())
 	LogIt(INFO, method, fmt.Sprintf("Successfully retrieved db name : '%s' and collection: '%s'", db.Name, collection.Name))
 	return *collection
 }

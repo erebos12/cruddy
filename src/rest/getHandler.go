@@ -4,10 +4,9 @@ import (
 	"fmt"
 	"net/http"
 
-	"infrastructure"
-	. "utils"
-
-	"model"
+	. "../infrastructure"
+	. "../model"
+	. "../utils"
 
 	"github.com/gin-gonic/gin"
 )
@@ -32,9 +31,9 @@ func SayHelloHandler(c *gin.Context) {
 // @Failure 404 {object} model.Message string "no results"
 // @Router /users/all [get]
 func GetAllHandler(c *gin.Context) {
-	results := infrastructure.GetAll()
+	results := GetAll()
 	if len(results) == 0 {
-		msg := model.Message{Message: "no results"}
+		msg := Message{Message: "no results"}
 		c.JSON(http.StatusOK, msg)
 	} else {
 		c.JSON(http.StatusOK, results)
@@ -56,7 +55,7 @@ func GetGenericAttributeHandler(c *gin.Context) {
 	attribute := c.Query("attribute")
 	value := c.Query("value")
 	LogIt(INFO, method, fmt.Sprintf("attribute=%s, value=%s", attribute, value))
-	results, err := infrastructure.FetchByGenericAttr(attribute, value)
+	results, err := FetchByGenericAttr(attribute, value)
 	if err != nil {
 		message := fmt.Sprintf("Error while getting user: '%+v'", err)
 		LogIt(ERROR, method, message)

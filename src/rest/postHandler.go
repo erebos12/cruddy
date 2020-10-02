@@ -4,12 +4,11 @@ import (
 	"fmt"
 	"net/http"
 
-	"model"
+	. "../infrastructure"
+	. "../model"
+	. "../utils"
 
 	"github.com/gin-gonic/gin"
-
-	"infrastructure"
-	. "utils"
 )
 
 // PostHandler godoc
@@ -24,14 +23,14 @@ import (
 // @Router /users [post]
 func PostHandler(c *gin.Context) {
 	method := "PostHandler"
-	var user model.User
+	var user User
 	err := c.BindJSON(&user)
 	if err != nil {
 		message := fmt.Sprintf("Error while unmarshalling json: '%+v'", err)
 		LogIt(ERROR, method, message)
 		c.JSON(http.StatusBadRequest, gin.H{"message": message})
 	} else {
-		infrastructure.Insert(user)
+		Insert(user)
 		c.JSON(http.StatusOK, user)
 	}
 }
