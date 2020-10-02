@@ -6,12 +6,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// @title Cruddy Swagger UI
-// @version 1.0
-// @description This is CRUDDY
-
-// @host localhost:8080
-// @BasePath /
 func GetRouter() *gin.Engine {
 	router := gin.Default()
 
@@ -21,7 +15,6 @@ func GetRouter() *gin.Engine {
 	router.POST("/users", PostHandler)
 	router.DELETE("/users", DeleteGenericAttributeHandler)
 	router.DELETE("/users/all", DeleteAllHandler)
-	//router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	return router
 }
 

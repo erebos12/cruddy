@@ -10,9 +10,7 @@ RUN mkdir $APP_HOME
 RUN go get -u gopkg.in/mgo.v2 \
     && go get -u github.com/gin-gonic/gin \
     && go get -u gopkg.in/check.v1 \
-    && go get -u github.com/vjeantet/jodaTime \
-    && go get -u github.com/swaggo/gin-swagger \
-    && go get -u github.com/swaggo/gin-swagger/swaggerFiles
+    && go get -u github.com/vjeantet/jodaTime
 
 COPY ./src/ $APP_HOME
 

@@ -11,16 +11,6 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// DeleteGenericAttributeHandler godoc
-// @Summary delete all users which match attribute and value
-// @Description delete all users which match attribute and value
-// @Tags users
-// @Produce json
-// @Param attribute query string true "attribute of a certain json"
-// @Param value query string true "the value of the parameter attribute"
-// @Success 200 {object} model.Message string "successfully deleted"
-// @Failure 404 {object} model.Message string "could not delete user"
-// @Router /users [delete]
 func DeleteGenericAttributeHandler(c *gin.Context) {
 	method := "DeleteGenericAttributeHandler"
 	attribute := c.Query("attribute")
@@ -39,14 +29,6 @@ func DeleteGenericAttributeHandler(c *gin.Context) {
 	}
 }
 
-// DeleteAllHandler godoc
-// @Summary delete all users
-// @Description delete all users
-// @Tags users
-// @Produce json
-// @Success 200 {object} model.Message string "successfully deleted all users"
-// @Failure 404 {object} model.Message string "could not delete all users"
-// @Router /users/all [delete]
 func DeleteAllHandler(c *gin.Context) {
 	method := "DeleteAllHandler"
 	info, err := DeleteAll()
